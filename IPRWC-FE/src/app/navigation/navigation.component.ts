@@ -9,6 +9,7 @@ import {AuthService} from "../auth.service";
 })
 export class NavigationComponent{
   imageSrc = 'assets/images/logo-webshop.jpg'
+  loggedIn = this.authService.isLoggedIn()
 
   constructor(private router: Router, private authService: AuthService) { }
 
