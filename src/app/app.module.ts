@@ -10,6 +10,7 @@ import { SignupComponent } from './signup/signup.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { HomeComponent } from './home/home.component';
 import { ShopComponent } from './shop/shop.component';
+import { ProductComponent } from './product/product.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ShopComponent } from './shop/shop.component';
     LoginComponent,
     SignupComponent,
     HomeComponent,
-    ShopComponent
+    ShopComponent,
+    ProductComponent
   ],
   imports: [
     BrowserModule,

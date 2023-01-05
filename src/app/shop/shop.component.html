@@ -23,12 +23,12 @@
   </div>
   <div class="grid 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-x-6 gap-y-12 w-full mt-6">
     <!-- Product Tile Start -->
-    <div *ngFor="let product of products; let i = index">
-      <a href="#" class="block h-64 rounded-lg shadow-lg bg-white"></a>
+    <div *ngFor="let product of products;">
+      <a routerLink="/product/{{product.id}}" class="block h-64 rounded-lg shadow-lg bg-white"><img src="assets/images/{{product.name}}.jpg"></a>
       <div class="flex items-center justify-between mt-3">
         <div>
-          <a href="#" class="font-medium">{{product.name}}</a>
-          <a class="flex items-center" href="#">
+          <a routerLink="/product/{{product.id}}" class="font-medium">{{product.name}}</a>
+          <a class="flex items-center">
             <span class="text-xs font-medium text-gray-600">{{product.shortDescription}}</span>
           </a>
         </div>

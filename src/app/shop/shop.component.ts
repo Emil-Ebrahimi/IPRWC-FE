@@ -1,12 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
+import {Product} from "../models/product.model";
 
-interface Product{
-  id: number;
-  price: number;
-  name: string;
-  shortDescription: string;
-}
 
 @Component({
   selector: 'app-shop',
@@ -25,7 +20,6 @@ export class ShopComponent implements OnInit {
     this.http.get<Product[]>('/api/v1/products').pipe()
       .subscribe(product => {
         this.products = product
-        console.log(this.products)
       }
      )
   }
