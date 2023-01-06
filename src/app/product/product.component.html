@@ -1,0 +1,25 @@
+<app-navigation>
+  <section class="text-gray-700 body-font">
+    <div class="container mx-auto flex px-5 py-24 md:flex-row flex-col">
+      <div class="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
+        <div class="flex justify-center">
+          <img class="object-cover object-center rounded" alt="{{product.shortDescription}}" [src]="imageSrc">
+        </div>
+      </div>
+      <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
+        <div class="flex">
+        <h1 class="title-font sm:text-4xl flex-1 text-3xl font-medium align-text-top text-gray-900">{{product.name}}
+        </h1>
+          <a routerLink="/shop">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 flex self-center">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
+          </svg>
+          </a>
+        </div>
+
+        <p class="mt-5">{{product.description}}</p>
+      </div>
+    </div>
+  </section>
+
+</app-navigation>
