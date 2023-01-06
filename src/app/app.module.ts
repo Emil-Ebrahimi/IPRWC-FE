@@ -11,6 +11,9 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { HomeComponent } from './home/home.component';
 import { ShopComponent } from './shop/shop.component';
 import { ProductComponent } from './product/product.component';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { EditProductComponent } from './edit-product/edit-product.component';
 
 @NgModule({
   declarations: [
@@ -20,14 +23,17 @@ import { ProductComponent } from './product/product.component';
     SignupComponent,
     HomeComponent,
     ShopComponent,
-    ProductComponent
+    ProductComponent,
+    ShoppingCartComponent,
+    AdminDashboardComponent,
+    EditProductComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
