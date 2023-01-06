@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpResponse} from "@angular/common/http";
 import {Product} from "../models/product.model";
+import {ToastrService} from "ngx-toastr";
 @Component({
   selector: 'app-edit-product',
   templateUrl: './edit-product.component.html',
@@ -8,7 +9,7 @@ import {Product} from "../models/product.model";
 })
 export class EditProductComponent implements OnInit {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private toastr: ToastrService) { }
   products: Product[]=[];
   ngOnInit() {
     this.getProducts()
@@ -23,7 +24,8 @@ export class EditProductComponent implements OnInit {
   }
 
   removeProduct(productID : number) {
-    return this.http.delete('api/v1/products/' + productID)
-
+    this.http.delete<Product>('/api/v1/products/' + productID).subscribe(() => {
+      this.toastr.success('Hello world!', 'Toastr fun!')
+    })
   }
 }
