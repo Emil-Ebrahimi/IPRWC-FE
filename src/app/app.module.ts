@@ -17,6 +17,11 @@ import { EditProductComponent } from './edit-product/edit-product.component';
 import {ToastrModule} from "ngx-toastr";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {AuthInterceptorService} from "./auth-interceptor.service";
+import { EditSingleProductComponent } from './edit-single-product/edit-single-product.component';
+import { AddProductComponent } from './add-product/add-product.component';
+import { EditUsersComponent } from './edit-users/edit-users.component';
+import { EditCategoriesComponent } from './edit-categories/edit-categories.component';
+import { AddCategoriesComponent } from './add-categories/add-categories.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +35,11 @@ import {AuthInterceptorService} from "./auth-interceptor.service";
     ShoppingCartComponent,
     AdminDashboardComponent,
     EditProductComponent,
+    EditSingleProductComponent,
+    AddProductComponent,
+    EditUsersComponent,
+    EditCategoriesComponent,
+    AddCategoriesComponent,
   ],
   imports: [
     BrowserModule,
