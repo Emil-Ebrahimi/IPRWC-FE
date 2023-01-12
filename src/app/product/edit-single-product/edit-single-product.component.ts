@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
-import {Product} from "../models/product.model";
+import {Product} from "../../models/product.model";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {AdminService} from "../admin.service";
+import {AdminService} from "../../admin.service";
 import {ToastrService} from "ngx-toastr";
-import {Category} from "../models/category.model";
-import {AuthService} from "../auth.service";
+import {Category} from "../../models/category.model";
+import {AuthService} from "../../auth.service";
 
 @Component({
-  selector: 'app-edit-single-product',
+  selector: 'app-edit-single-product-page',
   templateUrl: './edit-single-product.component.html',
   styleUrls: ['./edit-single-product.component.scss']
 })
