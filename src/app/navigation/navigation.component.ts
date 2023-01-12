@@ -8,11 +8,13 @@ import {AuthService} from "../auth.service";
   styleUrls: ['./navigation.component.scss']
 })
 export class NavigationComponent{
-  imageSrc = 'assets/images/logo-webshop.jpg'
-  loggedIn = this.authService.isLoggedIn()
+  imageSrc = 'assets/images/logo-webshop.jpg';
+  loggedIn = this.authService.isLoggedIn();
+  public showMobileMenu = false;
 
   constructor(private router: Router, private authService: AuthService) { }
 
+  public isAdmin = this.authService.isAdmin();
 
   logOut(){
     this.authService.logout();
