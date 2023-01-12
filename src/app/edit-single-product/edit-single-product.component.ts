@@ -6,6 +6,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AdminService} from "../admin.service";
 import {ToastrService} from "ngx-toastr";
 import {Category} from "../models/category.model";
+import {AuthService} from "../auth.service";
 
 @Component({
   selector: 'app-edit-single-product',
@@ -21,7 +22,7 @@ export class EditSingleProductComponent implements OnInit {
 
 
 
-  constructor(private toastr: ToastrService, private fb:FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private adminService: AdminService) {
+  constructor(private toastr: ToastrService, private fb:FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private authService: AuthService, private adminService: AdminService) {
 
   this.form = this.fb.group({
     name: ["", Validators.required],
@@ -33,12 +34,15 @@ export class EditSingleProductComponent implements OnInit {
   });
   }
   ngOnInit(): void {
+    if(!this.authService.isAdmin()) {
+      this.router.navigateByUrl('/');
+    }
     let productId!: String;
     this.route.params.subscribe(params => {
       productId = params['id'];
     });
-    this.getProduct(productId);
     this.getCategories();
+    this.getProduct(productId);
 
   }
 
@@ -51,15 +55,20 @@ export class EditSingleProductComponent implements OnInit {
   getProduct(productId: String) {
     this.http.get<Product>('/api/v1/products/' + productId).subscribe((res) => {
       this.product = res;
+      let selectedCategory;
+      if (this.product.category == null) {
+        selectedCategory = null;
+      } else {
+        selectedCategory = this.categories.find(({id}) => id === this.product.category.id);
+      }
       this.form.setValue({
         name: this.product.name,
         price: this.product.price,
         stock: this.product.stock,
         shortDescription: this.product.shortDescription,
-        category: this.product.category,
+        category: selectedCategory,
         description: this.product.description
       });
-      console.log(this.form.value)
     })
   }
 

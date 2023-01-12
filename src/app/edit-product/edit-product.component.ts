@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Product} from "../models/product.model";
 import {ToastrService} from "ngx-toastr";
+import {AuthService} from "../auth.service";
+import {Router} from "@angular/router";
 @Component({
   selector: 'app-edit-product',
   templateUrl: './edit-product.component.html',
@@ -9,9 +11,12 @@ import {ToastrService} from "ngx-toastr";
 })
 export class EditProductComponent implements OnInit {
 
-  constructor(private http: HttpClient, private toastr: ToastrService) { }
+  constructor(private http: HttpClient, private toastr: ToastrService, private authService: AuthService, private router: Router) { }
   products: Product[]=[];
   ngOnInit() {
+    if(!this.authService.isAdmin()) {
+      this.router.navigateByUrl('/');
+    }
     this.getProducts();
   }
 

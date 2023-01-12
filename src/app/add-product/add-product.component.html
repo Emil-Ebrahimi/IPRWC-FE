@@ -60,6 +60,7 @@
               <div class="w-full px-3">
                 <label for="category" class="sr-only">category</label>
                 <select name="category" id="category" formControlName="category">
+                  <option [ngValue]="null" selected disabled >Choose a category</option>
                   <option *ngFor="let category of categories" value="{{category.id}}">{{category.name}}</option>
                 </select>
                 <div *ngIf="form.controls['category'].invalid && (form.controls['category'].dirty || form.controls['category'].touched)" class="w-full mb-3">

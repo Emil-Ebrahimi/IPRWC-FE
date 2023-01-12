@@ -32,6 +32,8 @@ export class AuthService {
     localStorage.setItem('id_token', authResult.accessToken);
     localStorage.setItem("expires_at", JSON.stringify(expiresAt.valueOf()) );
     localStorage.setItem("userId", authResult.userId);
+    localStorage.setItem("admin", authResult.admin)
+
   }
 
   logout() {
@@ -42,6 +44,10 @@ export class AuthService {
 
   public isLoggedIn() {
     return moment().isBefore(this.getExpiration());
+  }
+
+  public isAdmin(){
+    return localStorage.getItem("admin") === "true"
   }
 
   isLoggedOut() {
