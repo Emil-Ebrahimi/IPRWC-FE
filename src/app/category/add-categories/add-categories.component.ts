@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {Category} from "../models/category.model";
+import {Category} from "../../models/category.model";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ToastrService} from "ngx-toastr";
 import {Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
-import {AdminService} from "../admin.service";
+import {AdminService} from "../../admin.service";
 
 @Component({
   selector: 'app-add-categories',

@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import {Product} from "../models/product.model";
+import {Product} from "../../models/product.model";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ToastrService} from "ngx-toastr";
 import {Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
-import {AdminService} from "../admin.service";
-import {Category} from "../models/category.model";
+import {AdminService} from "../../admin.service";
+import {Category} from "../../models/category.model";
 
 @Component({
-  selector: 'app-add-product',
+  selector: 'app-add-product-page',
   templateUrl: './add-product.component.html',
   styleUrls: ['./add-product.component.scss']
 })
@@ -52,7 +52,7 @@ export class AddProductComponent implements OnInit {
         next: () => {
           this.loading = false;
           this.router.navigateByUrl('/admin/edit-products');
-          this.toastr.success('Succesvol het product aangemaakt!', 'Product Aangemaakt!')
+          this.toastr.success('Succesvol het product-page aangemaakt!', 'Product Aangemaakt!')
         },
         error: error => {
           this.loading = false;

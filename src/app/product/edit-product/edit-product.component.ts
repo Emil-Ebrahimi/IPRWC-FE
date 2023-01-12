@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Product} from "../models/product.model";
+import {Product} from "../../models/product.model";
 import {ToastrService} from "ngx-toastr";
-import {AuthService} from "../auth.service";
+import {AuthService} from "../../auth.service";
 import {Router} from "@angular/router";
 @Component({
-  selector: 'app-edit-product',
+  selector: 'app-edit-product-page',
   templateUrl: './edit-product.component.html',
   styleUrls: ['./edit-product.component.scss']
 })

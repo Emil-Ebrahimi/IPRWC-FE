@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
-import {Product} from "../models/product.model";
+import {Product} from "../../models/product.model";
 
 
 
 @Component({
-  selector: 'app-product',
+  selector: 'app-product-page',
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.scss']
 })

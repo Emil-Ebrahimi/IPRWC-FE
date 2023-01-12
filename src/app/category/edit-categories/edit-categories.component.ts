@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {ToastrService} from "ngx-toastr";
-import {Category} from "../models/category.model";
-import {AuthService} from "../auth.service";
+import {Category} from "../../models/category.model";
+import {AuthService} from "../../auth.service";
 import {Router} from "@angular/router";
 
 @Component({
@@ -29,9 +29,15 @@ export class EditCategoriesComponent implements OnInit {
   }
 
   removeCategory(categoryID : String) {
-    this.http.delete<Category>('/api/v1/categories/' + categoryID).subscribe(() => {
-      this.ngOnInit();
-      this.toastr.error('Succesvol verwijderd!', 'Category verwijderd!');
-    })
+      this.http.delete<Category>('/api/v1/categories/' + categoryID).subscribe(  {
+        next: () => {
+        this.ngOnInit();
+        this.toastr.error('Succesvol verwijderd!', 'Category verwijderd!');
+      },
+        error: () => {
+          this.toastr.error('Er is een product die nog gebruik maakt van dit categorie!', 'Conflict!');
+        }
+        });
+
   }
 }
