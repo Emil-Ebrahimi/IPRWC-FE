@@ -5,6 +5,7 @@ import {ToastrService} from "ngx-toastr";
 import {Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
 import {AdminService} from "../../admin.service";
+import {AuthService} from "../../auth.service";
 
 @Component({
   selector: 'app-add-categories',
@@ -19,13 +20,16 @@ export class AddCategoriesComponent implements OnInit {
 
 
 
-  constructor(private toastr: ToastrService, private fb:FormBuilder, private router: Router, private http: HttpClient, private adminService: AdminService) {
+  constructor(private toastr: ToastrService, private fb:FormBuilder, private router: Router, private http: HttpClient, private authService: AuthService, private adminService: AdminService) {
 
     this.form = this.fb.group({
       name: ["", Validators.required],
     });
   }
   ngOnInit(): void {
+    if(!this.authService.isAdmin()) {
+      this.router.navigateByUrl('/');
+    }
   }
 
 

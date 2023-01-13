@@ -29,7 +29,8 @@ export class AddProductComponent implements OnInit {
       stock: ["", Validators.required],
       shortDescription: ["", Validators.required],
       category: [null, Validators.required],
-      description: ["", Validators.required]
+      description: ["", Validators.required],
+      imageSrc: ["", Validators.required]
     });
   }
   ngOnInit(): void {
@@ -48,7 +49,7 @@ export class AddProductComponent implements OnInit {
     const val = this.form.value;
     if (this.form.valid) {
       this.loading = true
-      this.adminService.createProduct(val.name, val.price, val.stock, val.category, val.shortDescription, val.description).subscribe({
+      this.adminService.createProduct(val.name, val.price, val.stock, val.category, val.shortDescription, val.description, val.imageSrc).subscribe({
         next: () => {
           this.loading = false;
           this.router.navigateByUrl('/admin/edit-products');

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
 import {Product} from "../../models/product.model";
+import {CartService} from "../../cart.service";
+import {ToastrService} from "ngx-toastr";
 
 
 
@@ -12,12 +14,13 @@ import {Product} from "../../models/product.model";
 })
 export class ProductComponent implements OnInit {
   product: Product = {} as Product;
-  imageSrc: string = '';
+  quantity: number = 1;
 
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) { }
+  constructor(private route: ActivatedRoute, private http: HttpClient, private cartService: CartService, private toastr: ToastrService) { }
 
  ngOnInit() {
+   this.cartService.initCart();
     let productId!: number;
     this.route.params.subscribe(params => {
       productId = params['id'];
@@ -28,8 +31,26 @@ export class ProductComponent implements OnInit {
   getProduct(productId: number) {
     this.http.get<Product>('/api/v1/products/' + productId).subscribe((res) => {
        this.product = res;
-      this.imageSrc = "assets/images/" + res.name + ".jpg";
     })
+  }
+
+  addQuantity() {
+    this.quantity++;
+  }
+
+  subtractQuantity() {
+    if (this.quantity == 1 || this.quantity < 1) {
+      this.quantity = 1;
+      this.toastr.error("Not allowed", "Error")
+
+    } else
+    {
+      this.quantity--;
+    }
+    }
+
+  addToCart() {
+   this.cartService.addToCart(this.product.id, this.quantity);
   }
 
 }

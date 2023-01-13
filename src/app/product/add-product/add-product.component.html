@@ -81,6 +81,17 @@
               </div>
             </div>
 
+            <div class="flex flex-wrap -mx-3 mb-6">
+              <div class="w-full px-3">
+                <label for="imageSrc" class="sr-only">Image source</label>
+                <textarea   id="imageSrc" name="imageSrc" formControlName="imageSrc" type="text" required class="relative block w-full {{(form.controls['imageSrc'].invalid && (form.controls['description'].dirty || form.controls['category'].touched)) && 'border-red-500'}} appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" placeholder="image source of the product"> </textarea>
+                <div *ngIf="form.controls['imageSrc'].invalid && (form.controls['description'].dirty || form.controls['description'].touched)" class="w-full mb-3">
+                  <p *ngIf="this.form.get('imageSrc')?.errors?.['required']" class="text-red-400 text-sm mt-2 ml-1 tracking-tight" >image source is required.</p>
+                  <p *ngIf="this.form.get('imageSrc')?.errors?.['pattern']" class="text-red-400 text-sm mt-2 ml-1  tracking-tight" >image source is not valid.</p>
+                </div>
+              </div>
+            </div>
+
 
 
             <div>
@@ -100,7 +111,7 @@
           <path fill-rule="evenodd" d="M12 3.75a.75.75 0 01.75.75v6.75h6.75a.75.75 0 010 1.5h-6.75v6.75a.75.75 0 01-1.5 0v-6.75H4.5a.75.75 0 010-1.5h6.75V4.5a.75.75 0 01.75-.75z" clip-rule="evenodd" />
             </svg>
           </span>
-                {{loading ? "" : "Voeg product-page toe"}}
+                {{loading ? "" : "Add product"}}
               </button>
             </div>
           </div>

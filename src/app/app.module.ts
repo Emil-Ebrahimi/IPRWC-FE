@@ -55,8 +55,8 @@ import { EditSinglePromoCodeComponent } from './promocode/edit-single-promo-code
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule, // required animations module
-    ToastrModule.forRoot(), // ToastrModule added
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   providers: [{
     provide : HTTP_INTERCEPTORS,
