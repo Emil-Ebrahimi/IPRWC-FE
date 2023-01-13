@@ -30,7 +30,8 @@ export class EditSingleProductComponent implements OnInit {
     stock: ["", Validators.required],
     shortDescription: ["", Validators.required],
     category: [null, Validators.required],
-    description: ["", Validators.required]
+    description: ["", Validators.required],
+    imageSrc: ["", Validators.required]
   });
   }
   ngOnInit(): void {
@@ -67,7 +68,8 @@ export class EditSingleProductComponent implements OnInit {
         stock: this.product.stock,
         shortDescription: this.product.shortDescription,
         category: selectedCategory,
-        description: this.product.description
+        description: this.product.description,
+        imageSrc: this.product.imageSrc
       });
     })
   }
@@ -78,7 +80,7 @@ export class EditSingleProductComponent implements OnInit {
     if (this.form.valid) {
       this.loading = true
       console.log(val);
-      this.adminService.editProduct(this.product.id, val.name, val.price, val.stock, val.category, val.shortDescription, val.description).subscribe({
+      this.adminService.editProduct(this.product.id, val.name, val.price, val.stock, val.category, val.shortDescription, val.description, val.imageSrc).subscribe({
         next: () => {
           this.loading = false;
           this.router.navigateByUrl('/admin/edit-products');

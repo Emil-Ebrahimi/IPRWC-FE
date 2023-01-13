@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import * as moment from "moment";
 import {HttpClient, HttpResponse} from "@angular/common/http";
 import {Buffer} from "buffer"
@@ -32,7 +32,7 @@ export class AuthService {
     localStorage.setItem('id_token', authResult.accessToken);
     localStorage.setItem("expires_at", JSON.stringify(expiresAt.valueOf()) );
     localStorage.setItem("userId", authResult.userId);
-    localStorage.setItem("admin", authResult.admin)
+    localStorage.setItem("admin", authResult.admin);
 
   }
 
