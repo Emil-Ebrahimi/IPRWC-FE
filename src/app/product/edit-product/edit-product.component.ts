@@ -4,12 +4,14 @@ import {Product} from "../../models/product.model";
 import {ToastrService} from "ngx-toastr";
 import {AuthService} from "../../auth.service";
 import {Router} from "@angular/router";
+import {environment} from "../../../environments/environment";
 @Component({
   selector: 'app-edit-product-page',
   templateUrl: './edit-product.component.html',
   styleUrls: ['./edit-product.component.scss']
 })
 export class EditProductComponent implements OnInit {
+  private baseUrl = environment.base_url;
 
   constructor(private http: HttpClient, private toastr: ToastrService, private authService: AuthService, private router: Router) { }
   products: Product[]=[];
@@ -21,7 +23,7 @@ export class EditProductComponent implements OnInit {
   }
 
   getProducts() {
-    this.http.get<Product[]>('/api/v1/products').pipe()
+    this.http.get<Product[]>(this.baseUrl + '/api/v1/products').pipe()
       .subscribe(product => {
           this.products = product;
         }
@@ -29,7 +31,7 @@ export class EditProductComponent implements OnInit {
   }
 
   removeProduct(productID : String) {
-    this.http.delete<Product>('/api/v1/products/' + productID).subscribe(() => {
+    this.http.delete<Product>(this.baseUrl + '/api/v1/products/' + productID).subscribe(() => {
       this.ngOnInit();
       this.toastr.error('Succesvol verwijderd!', 'Product verwijderd!');
     })

@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Product} from "../models/product.model";
 import {AuthService} from "../auth.service";
 import {CartService} from "../cart.service";
+import {environment} from "../../environments/environment";
 
 @Component({
   selector: 'app-shopping-cart',
@@ -10,6 +11,7 @@ import {CartService} from "../cart.service";
   styleUrls: ['./shopping-cart.component.scss']
 })
 export class ShoppingCartComponent implements OnInit {
+  private baseUrl = environment.base_url;
 
   constructor(private http: HttpClient, private authService: AuthService, private cartService: CartService) {
   }
@@ -38,7 +40,7 @@ export class ShoppingCartComponent implements OnInit {
 
 
   getProduct(productId: String, quantity:number) {
-    this.http.get<Product>('/api/v1/products/' + productId).subscribe((res) => {
+    this.http.get<Product>(this.baseUrl + '/api/v1/products/' + productId).subscribe((res) => {
       res.quantity = quantity;
       res.totalPrice = res.price * quantity;
       this.totalProducts += res.quantity;

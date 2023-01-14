@@ -4,37 +4,38 @@ import {Product} from "./models/product.model";
 import {Category} from "./models/category.model";
 import {PromoCode} from "./models/promoCode.model";
 import {Observable} from "rxjs";
+import {environment} from "../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminService {
-  private baseUrl = 'http://localhost:8080';
+  private baseUrl = environment.base_url;
 
   constructor(private http: HttpClient) { }
 
   editProduct(id: String, name:String, price:Number, stock:Number, category:Category, shortDescription:String, description: String, imageSrc: String) {
-    return this.http.patch<HttpResponse<any>>('/api/v1/products/' + id, {id, name, price, stock, category, shortDescription, description, imageSrc})
+    return this.http.patch<HttpResponse<any>>(this.baseUrl + '/api/v1/products/' + id, {id, name, price, stock, category, shortDescription, description, imageSrc})
   }
 
   editCategory(id: String, name:String) {
-    return this.http.patch<HttpResponse<any>>('/api/v1/categories/' + id, {id, name})
+    return this.http.patch<HttpResponse<any>>(this.baseUrl + '/api/v1/categories/' + id, {id, name})
   }
 
   editPromoCode(id: String, name:String, korting:Number) {
-    return this.http.patch<HttpResponse<any>>('/api/v1/promocodes/' + id, {id, name, korting})
+    return this.http.patch<HttpResponse<any>>(this.baseUrl + '/api/v1/promocodes/' + id, {id, name, korting})
   }
 
   createProduct(name:String, price:Number, stock:Number, category:Category, shortDescription:String, description: String, imageSrc: String) {
-    return this.http.post<Product>('/api/v1/products', {name, price, stock, category, shortDescription, description, imageSrc})
+    return this.http.post<Product>(this.baseUrl + '/api/v1/products', {name, price, stock, category, shortDescription, description, imageSrc})
   }
 
   createCategory(name:String) {
-    return this.http.post<Category>('/api/v1/categories', {name})
+    return this.http.post<Category>(this.baseUrl + '/api/v1/categories', {name})
   }
 
   createPromoCode(name:String, korting:Number) {
-    return this.http.post<PromoCode>('/api/v1/promocodes', {name, korting})
+    return this.http.post<PromoCode>(this.baseUrl + '/api/v1/promocodes', {name, korting})
   }
 
 
