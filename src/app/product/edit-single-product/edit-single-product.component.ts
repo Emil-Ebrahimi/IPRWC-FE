@@ -7,6 +7,7 @@ import {AdminService} from "../../admin.service";
 import {ToastrService} from "ngx-toastr";
 import {Category} from "../../models/category.model";
 import {AuthService} from "../../auth.service";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-edit-single-product-page',
@@ -14,6 +15,8 @@ import {AuthService} from "../../auth.service";
   styleUrls: ['./edit-single-product.component.scss']
 })
 export class EditSingleProductComponent implements OnInit {
+  private baseUrl = environment.base_url;
+
   product: Product = {} as Product;
   public loading = false;
   categories: Category[]=[];
@@ -48,13 +51,13 @@ export class EditSingleProductComponent implements OnInit {
   }
 
   getCategories() {
-    this.http.get<Category[]>('/api/v1/categories').pipe().subscribe((res) => {
+    this.http.get<Category[]>(this.baseUrl + '/api/v1/categories').pipe().subscribe((res) => {
       this.categories = res;
     })
   }
 
   getProduct(productId: String) {
-    this.http.get<Product>('/api/v1/products/' + productId).subscribe((res) => {
+    this.http.get<Product>(this.baseUrl + '/api/v1/products/' + productId).subscribe((res) => {
       this.product = res;
       let selectedCategory;
       if (this.product.category == null) {
@@ -62,15 +65,13 @@ export class EditSingleProductComponent implements OnInit {
       } else {
         selectedCategory = this.categories.find(({id}) => id === this.product.category.id);
       }
-      this.form.setValue({
-        name: this.product.name,
-        price: this.product.price,
-        stock: this.product.stock,
-        shortDescription: this.product.shortDescription,
-        category: selectedCategory,
-        description: this.product.description,
-        imageSrc: this.product.imageSrc
-      });
+      this.form.get("name")?.setValue(this.product.name);
+      this.form.get("price")?.setValue(this.product.price);
+      this.form.get("stock")?.setValue(this.product.stock);
+      this.form.get("shortDescription")?.setValue(this.product.shortDescription);
+      this.form.get("category")?.setValue(selectedCategory);
+      this.form.get("description")?.setValue(this.product.description);
+      this.form.get("imageSrc")?.setValue(this.product.imageSrc);
     })
   }
 

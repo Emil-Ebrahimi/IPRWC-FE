@@ -4,6 +4,7 @@ import {HttpClient} from "@angular/common/http";
 import {Product} from "../../models/product.model";
 import {CartService} from "../../cart.service";
 import {ToastrService} from "ngx-toastr";
+import {environment} from "../../../environments/environment";
 
 
 
@@ -15,6 +16,7 @@ import {ToastrService} from "ngx-toastr";
 export class ProductComponent implements OnInit {
   product: Product = {} as Product;
   quantity: number = 1;
+  private baseUrl = environment.base_url;
 
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private cartService: CartService, private toastr: ToastrService) { }
@@ -29,7 +31,7 @@ export class ProductComponent implements OnInit {
  }
 
   getProduct(productId: number) {
-    this.http.get<Product>('/api/v1/products/' + productId).subscribe((res) => {
+    this.http.get<Product>(this.baseUrl + '/api/v1/products/' + productId).subscribe((res) => {
        this.product = res;
     })
   }

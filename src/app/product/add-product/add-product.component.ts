@@ -6,6 +6,7 @@ import {Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
 import {AdminService} from "../../admin.service";
 import {Category} from "../../models/category.model";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-add-product-page',
@@ -17,6 +18,7 @@ export class AddProductComponent implements OnInit {
   categories: Category[]=[];
   public loading = false;
   form:FormGroup;
+  private baseUrl = environment.base_url;
 
 
 
@@ -39,7 +41,7 @@ export class AddProductComponent implements OnInit {
 
 
   getCategories() {
-    this.http.get<Category[]>('/api/v1/categories').pipe().subscribe((res) => {
+    this.http.get<Category[]>(this.baseUrl + '/api/v1/categories').pipe().subscribe((res) => {
       this.categories = res;
     })
   }

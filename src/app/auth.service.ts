@@ -3,11 +3,14 @@ import * as moment from "moment";
 import {HttpClient, HttpResponse} from "@angular/common/http";
 import {Buffer} from "buffer"
 import {Router} from "@angular/router";
+import {environment} from "../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+
+  private baseUrl = environment.base_url;
 
 
   constructor(private http: HttpClient, private router :  Router) { }
@@ -18,11 +21,11 @@ export class AuthService {
   }
 
   signup(email:string, password:string, firstName:string, preposition:string, lastName:string) {
-    return this.http.post<HttpResponse<any>>('/api/v1/auth/signup', {email, password, firstName, preposition, lastName})
+    return this.http.post<HttpResponse<any>>(this.baseUrl + '/api/v1/auth/signup', {email, password, firstName, preposition, lastName})
   }
 
   login(email:string, password:string) {
-    return this.http.post<{accessToken : string,expiresAt : string, userId:any }>('/api/v1/auth/login', {email, password})
+    return this.http.post<{accessToken : string,expiresAt : string, userId:any }>(this.baseUrl + '/api/v1/auth/login', {email, password})
 
   }
 

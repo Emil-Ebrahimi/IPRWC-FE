@@ -4,12 +4,14 @@ import {ToastrService} from "ngx-toastr";
 import {AuthService} from "../../auth.service";
 import {Router} from "@angular/router";
 import {PromoCode} from "../../models/promoCode.model";
+import {environment} from "../../../environments/environment";
 @Component({
   selector: 'app-edit-promocode',
   templateUrl: './edit-promocode.component.html',
   styleUrls: ['./edit-promocode.component.scss']
 })
 export class EditPromocodeComponent implements OnInit {
+  private baseUrl = environment.base_url;
 
   constructor(private http: HttpClient, private toastr: ToastrService, private authService: AuthService, private router: Router) { }
   promoCodes: PromoCode[]=[];
@@ -22,7 +24,7 @@ export class EditPromocodeComponent implements OnInit {
   }
 
   getPromoCodes() {
-    this.http.get<PromoCode[]>('/api/v1/promocodes').pipe()
+    this.http.get<PromoCode[]>(this.baseUrl + '/api/v1/promocodes').pipe()
       .subscribe(promocode => {
           this.promoCodes = promocode;
         }
@@ -30,7 +32,7 @@ export class EditPromocodeComponent implements OnInit {
   }
 
   removePromoCode(promoID : String) {
-    this.http.delete<PromoCode>('/api/v1/promocodes/' + promoID).subscribe( () => {
+    this.http.delete<PromoCode>(this.baseUrl + '/api/v1/promocodes/' + promoID).subscribe( () => {
         this.ngOnInit();
         this.toastr.error('Succesvol verwijderd!', 'Promocode verwijderd!');
       }

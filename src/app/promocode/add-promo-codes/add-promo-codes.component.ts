@@ -4,6 +4,7 @@ import {ToastrService} from "ngx-toastr";
 import {Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
 import {AdminService} from "../../admin.service";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-add-promo-codes',
@@ -11,6 +12,7 @@ import {AdminService} from "../../admin.service";
   styleUrls: ['./add-promo-codes.component.scss']
 })
 export class AddPromoCodesComponent implements OnInit {
+  private baseUrl = environment.base_url;
   public loading = false;
   form:FormGroup;
 
@@ -36,7 +38,7 @@ export class AddPromoCodesComponent implements OnInit {
       this.adminService.createPromoCode(val.name, val.korting).subscribe({
         next: () => {
           this.loading = false;
-          this.router.navigateByUrl('/admin/edit-promocodes');
+          this.router.navigateByUrl(this.baseUrl + '/admin/edit-promocodes');
           this.toastr.success('Succesvol het promoCode aangemaakt!', 'PromoCodeModel Aangemaakt!')
         },
         error: error => {

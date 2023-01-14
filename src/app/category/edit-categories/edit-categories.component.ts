@@ -4,6 +4,7 @@ import {ToastrService} from "ngx-toastr";
 import {Category} from "../../models/category.model";
 import {AuthService} from "../../auth.service";
 import {Router} from "@angular/router";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-edit-categories',
@@ -11,6 +12,8 @@ import {Router} from "@angular/router";
   styleUrls: ['./edit-categories.component.scss']
 })
 export class EditCategoriesComponent implements OnInit {
+  private baseUrl = environment.base_url;
+
   constructor(private http: HttpClient, private toastr: ToastrService, private authService: AuthService, private router: Router) { }
   categories: Category[]=[];
   ngOnInit() {
@@ -21,7 +24,7 @@ export class EditCategoriesComponent implements OnInit {
   }
 
   getCategories() {
-    this.http.get<Category[]>('/api/v1/categories').pipe()
+    this.http.get<Category[]>(this.baseUrl + '/api/v1/categories').pipe()
       .subscribe(category => {
           this.categories = category;
         }
@@ -29,7 +32,7 @@ export class EditCategoriesComponent implements OnInit {
   }
 
   removeCategory(categoryID : String) {
-      this.http.delete<Category>('/api/v1/categories/' + categoryID).subscribe(  {
+      this.http.delete<Category>(this.baseUrl + '/api/v1/categories/' + categoryID).subscribe(  {
         next: () => {
         this.ngOnInit();
         this.toastr.error('Succesvol verwijderd!', 'Category verwijderd!');

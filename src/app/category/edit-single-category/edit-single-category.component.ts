@@ -7,6 +7,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
 import {AuthService} from "../../auth.service";
 import {AdminService} from "../../admin.service";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-edit-single-category',
@@ -14,6 +15,7 @@ import {AdminService} from "../../admin.service";
   styleUrls: ['./edit-single-category.component.scss']
 })
 export class EditSingleCategoryComponent implements OnInit {
+  private baseUrl = environment.base_url;
 
   category: Category = {} as Category;
   public loading = false;
@@ -41,7 +43,7 @@ export class EditSingleCategoryComponent implements OnInit {
   }
 
   getCategory(categoryId: String) {
-    this.http.get<Category>('/api/v1/categories/' + categoryId).subscribe((res) => {
+    this.http.get<Category>(this.baseUrl + '/api/v1/categories/' + categoryId).subscribe((res) => {
       this.category = res;
       this.form.setValue({
         name: this.category.name,
